@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --theme-headings: 33 37 41;
+    --theme-bodycolor: 73 80 87;
+    --theme-secondarytextcolor: 108 117 125;
+    --theme-bodybg: 248 249 250;
+    --theme-cardbg: 255 255 255;
+    --theme-border: 222 226 230;
+    --theme-inputborder: 206 212 218;
+    --theme-inputbg: 255 255 255;
+    --theme-sidebarbg: 17 25 40;
+    --theme-sidebarcaption: 148 163 184;
+    --theme-sidebarcolor: 226 232 240;
+    --theme-lightsidebarbg: 255 255 255;
+    --theme-lightsidebarcaption: 108 117 125;
+    --theme-lightsidebarcolor: 33 37 41;
+    --theme-headerbg: 255 255 255;
+    --theme-headercolor: 33 37 41;
+    --theme-activebg: 0 0 0;
+
+    --themedark-headings: 248 249 250;
+    --themedark-bodycolor: 206 212 218;
+    --themedark-secondarytextcolor: 173 181 189;
+    --themedark-bodybg: 18 20 24;
+    --themedark-cardbg: 26 29 34;
+    --themedark-border: 52 58 64;
+    --themedark-inputborder: 73 80 87;
+    --themedark-inputbg: 26 29 34;
+    --themedark-sidebarbg: 17 25 40;
+    --themedark-sidebarcaption: 148 163 184;
+    --themedark-sidebarcolor: 226 232 240;
+    --themedark-headerbg: 26 29 34;
+    --themedark-headercolor: 248 249 250;
+    --themedark-activebg: 255 255 255;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  /* background-color: #b2c2d1; */
 }
+
+
+
+.login-image {
+  background-image: url('../public/images/backGroundImage.jpg');
+  background-size:cover;
+  background-position: center;
+background-repeat: no-repeat;
+}
+
+
