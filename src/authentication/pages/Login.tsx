@@ -8,15 +8,22 @@ export default function Login(){
     const { login } = useAuth();
     const navigate = useNavigate();
     const handleSubmit = async(data:{phoneNumber:string, pin:string}) => {
-        loginApi({phoneNumber:data.phoneNumber, pin:data.pin}).then((res:any) =>{
-        
-            login(res.accessToken);
-            if(!res.isTwoFactorEnabled){
+        try {
+            const res = await loginApi({ phoneNumber: data.phoneNumber, pin: data.pin });
+
+            if (res.requiresTwoFactor || !res.accessToken) {
+
+                localStorage.setItem("phoneNumber", data.phoneNumber);
                 navigate("/otp");
-            }else{
-                navigate("/");
+                return;
             }
-        })
+
+            login(res.accessToken);
+            navigate("/dashboard");
+        } catch (error) {
+            // Request errors are already handled by the shared HTTP client.
+            console.error(error);
+        }
     };
 
     return (

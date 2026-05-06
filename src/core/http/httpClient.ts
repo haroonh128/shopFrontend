@@ -1,6 +1,7 @@
 import { HttpsRequestOptions } from "./http.types";
 import NProgress from "nprogress";
 import toastr from "toastr";
+import type { ApiResponse } from "../../shared";
 
 const BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
@@ -63,11 +64,7 @@ function unwrapApiPayload<TResponse>(payload: unknown): TResponse {
     return payload as TResponse;
   }
 
-  const apiPayload = payload as {
-    success?: unknown;
-    message?: unknown;
-    data?: unknown;
-  };
+  const apiPayload = payload as Partial<ApiResponse<TResponse>>;
 
   if (apiPayload.success === false) {
     const errorMessage =

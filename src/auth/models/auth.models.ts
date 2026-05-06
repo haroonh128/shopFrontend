@@ -12,6 +12,14 @@ export interface JwtUser {
   }
   
   export interface AuthResponse {
-    accessToken: string;
+    accessToken: string | null;
+    refreshToken: string | null;
+    expiresAt: Date | null;
+    requiresTwoFactor: boolean;
+    user: {
+      id: string;
+      phoneNumber: string;
+      isTwoFactorEnabled: boolean;
+    }
   }
   

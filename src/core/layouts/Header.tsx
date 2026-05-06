@@ -2,23 +2,23 @@ import React from 'react'
 
 export default function Header() {
   return (
-    <>
+    <header className="pc-header z-[1027] left-0 right-0 lg:left-sidebar-width">
     <div className="me-auto pc-mob-drp">
       <ul className="inline-flex *:min-h-header-height *:inline-flex *:items-center">
         <li className="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex">
           <a href="#" className="pc-head-link ltr:!ml-0 rtl:!mr-0" id="sidebar-hide">
-            <i data-feather="menu"></i>
+            <i className="ti ti-menu-2"></i>
           </a>
         </li>
         <li className="pc-h-item pc-sidebar-popup lg:hidden">
           <a href="#" className="pc-head-link ltr:!ml-0 rtl:!mr-0" id="mobile-collapse">
-            <i data-feather="menu"></i>
+            <i className="ti ti-menu-2"></i>
           </a>
         </li>
         <li className="dropdown pc-h-item">
-          <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
+          <a className="pc-head-link dropdown-toggle me-0 trig-drp-search" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
-            <i data-feather="search"></i>
+            <i className="ti ti-search"></i>
           </a>
           <div className="dropdown-menu pc-h-dropdown drp-search">
             <form className="px-2 py-1">
@@ -33,22 +33,22 @@ export default function Header() {
         <li className="dropdown pc-h-item">
           <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
-            <i data-feather="sun"></i>
+            <i className="ti ti-sun"></i>
           </a>
           <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
           {/* onClick={() => layout_change('dark')} */}
             <a href="#!" className="dropdown-item" >
-              <i data-feather="moon"></i>
+              <i className="ti ti-moon"></i>
               <span>Dark</span>
             </a>
             {/* onClick={() => layout_change('light')} */}
             <a href="#!" className="dropdown-item" >
-              <i data-feather="sun"></i>
+              <i className="ti ti-sun"></i>
               <span>Light</span>
             </a>
             {/* onClick={() => layout_change_default()} */}
             <a href="#!" className="dropdown-item" >
-              <i data-feather="settings"></i>
+              <i className="ti ti-settings"></i>
               <span>Default</span>
             </a>
           </div>
@@ -56,7 +56,7 @@ export default function Header() {
         <li className="dropdown pc-h-item">
           <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
-            <i data-feather="settings"></i>
+            <i className="ti ti-settings"></i>
           </a>
           <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
             <a href="#!" className="dropdown-item">
@@ -84,7 +84,7 @@ export default function Header() {
         <li className="dropdown pc-h-item">
           <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
-            <i data-feather="bell"></i>
+            <i className="ti ti-bell"></i>
             <span className="badge bg-success-500 text-white rounded-full z-10 absolute right-0 top-0">3</span>
           </a>
           <div className="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown p-2">
@@ -92,7 +92,7 @@ export default function Header() {
               <h5 className="m-0">Notifications</h5>
               <a href="#!" className="btn btn-link btn-sm">Mark all read</a>
             </div>
-            <div className="dropdown-body header-notification-scroll relative py-4 px-5"
+            <div className="dropdown-body header-notification-scroll relative py-4 px-5 overflow-y-auto"
               style={{ maxHeight: 'calc(100vh - 215px)' }}>
               <p className="text-span mb-3">Today</p>
               <div className="card mb-2">
@@ -194,7 +194,7 @@ export default function Header() {
         <li className="dropdown pc-h-item header-user-profile">
           <a className="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" data-pc-auto-close="outside" aria-expanded="false">
-            <i data-feather="user"></i>
+            <i className="ti ti-user-circle"></i>
           </a>
           <div className="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown p-2 overflow-hidden">
             <div className="dropdown-header flex items-center justify-between py-4 px-5 bg-primary-500">
@@ -247,6 +247,7 @@ export default function Header() {
           </div>
         </li>
       </ul>
-    </div></>
+    </div>
+    </header>
   );
 }

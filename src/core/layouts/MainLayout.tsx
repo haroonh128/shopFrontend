@@ -3,16 +3,14 @@ import Header from "./Header";
 
 export default function MainLayout({ children }: any) {
   return (
-    <div className="flex h-screen bg-theme-bodybg">
+    <div className="bg-theme-bodybg min-h-screen">
       <Sidebar />
-
-      <div className="flex-1 flex flex-col">
-        <Header />
-
-        <main className="p-4 overflow-y-auto">
+      <Header />
+      <main className="pc-container">
+        <div className="pc-content">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

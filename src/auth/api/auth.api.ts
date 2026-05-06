@@ -13,3 +13,6 @@ export const logout = () =>
 
 export const register = (data: registrationFormValues) =>
   http.post<null, registrationFormValues>("/Auth/register", data);
+
+export const verifyOtp = (data: { phoneNumber: string, otpCode: string }) =>
+  http.post<AuthResponse, { phoneNumber: string, otpCode: string }>("/Auth/verify-otp", data);
