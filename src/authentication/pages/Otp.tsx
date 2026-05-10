@@ -24,7 +24,7 @@ export default function Otp() {
         login(res?.accessToken || '');
         setItem("auth", res?.accessToken || '');
         setItemAsObject("user", res?.user || {});
-        navigate("/dashboard");
+        navigate("/modules");
       }
     },
     onReset: () => {
