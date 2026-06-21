@@ -4,16 +4,21 @@ import { useNavigate } from "react-router-dom";
 import ModuleRow, { type ModuleEntry, type Pill } from "./ModuleRow";
 
 const MODULES: ModuleEntry[] = [
-  { id: "accounting", title: "Accounting", icon: "pi pi-wallet" },
+  { id: "tailoring", title: "Tailoring", icon: "pi pi-star-half"
+   },
   {
-    id: "administration",
-    title: "Administration",
-    icon: "pi pi-user-edit",
+    id: "generalStore",
+    title: "General Store",
+    icon: "pi pi-shopping-bag",
     pills: [
-      { id: "users", label: "User Management", to: "/dashboard" },
-      { id: "activity", label: "Activity Tracker" },
-      { id: "login-report", label: "Login Activity Report" },
-      { id: "email", label: "Email Workflow" },
+      { id: "company", label: "Company", to: "/dashboard" },
+      { id: "users", label: "Users", to: "/dashboard" },
+      { id: "products", label: "Products", to: "/dashboard" },
+      { id: "sales", label: "Sales", to: "/dashboard" },
+      { id: "purchases", label: "Purchases", to: "/dashboard" },
+      { id: "inventory", label: "Inventory", to: "/dashboard" },
+      { id: "reports", label: "Reports", to: "/dashboard" },
+      { id: "settings", label: "Settings", to: "/dashboard" },
     ],
   },
   {
