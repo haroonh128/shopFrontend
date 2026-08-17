@@ -25,6 +25,14 @@ module.exports = plugin(function ({ addComponents, theme }) {
         '~.pc-container, ~.pc-footer': {
           '@apply ltr:lg:ml-0 rtl:lg:mr-0': {}
         }
+      },
+      '&.pc-sidebar-mini': {
+        '~.pc-header': {
+          '@apply ltr:lg:left-sidebar-collapsed-width rtl:lg:right-sidebar-collapsed-width': {}
+        },
+        '~.pc-container, ~.pc-footer': {
+          '@apply ltr:lg:ml-sidebar-collapsed-width rtl:lg:mr-sidebar-collapsed-width': {}
+        }
       }
     },
     '.footer-wrapper, .pc-content': {

@@ -4,6 +4,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",   // ✅ React support
+    "./node_modules/primereact/passthrough/tailwind/**/*.js",
   ],
   darkMode: ['class', '[data-pc-theme="dark"]'],
   theme: {

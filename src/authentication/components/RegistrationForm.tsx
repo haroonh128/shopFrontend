@@ -252,6 +252,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
                   optionLabel="label"
                   optionValue="value"
                   placeholder="Select App Type"
+                  className="form-input"
                   filter
                   showClear
                 />

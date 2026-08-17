@@ -2,11 +2,14 @@ import { HttpsRequestOptions } from "./http.types";
 import NProgress from "nprogress";
 import toastr from "toastr";
 import type { ApiResponse } from "../../shared";
+import { getItem } from "../../shared";
 
 const BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   import.meta.env.VITE_API_BASE_URL ||
   "http://localhost:7482/api/v1";
+
+const AUTH_STORAGE_KEY = "auth";
 
 NProgress.configure({ showSpinner: true, trickleSpeed: 120 });
 toastr.options = {
@@ -37,7 +40,24 @@ function stopLoading(): void {
 async function parseErrorMessage(res: Response): Promise<string> {
   try {
     const text = await res.text();
-    return text || res.statusText || "Request failed";
+    if (!text) return res.statusText || "Request failed";
+
+    try {
+      const json = JSON.parse(text) as {
+        message?: unknown;
+        errors?: unknown;
+      };
+      if (typeof json.message === "string" && json.message.trim()) {
+        return json.message;
+      }
+      if (Array.isArray(json.errors) && json.errors.length > 0) {
+        return json.errors.filter((e) => typeof e === "string").join(", ") || text;
+      }
+    } catch {
+      // Response was not JSON; use raw text.
+    }
+
+    return text;
   } catch {
     return res.statusText || "Request failed";
   }
@@ -81,6 +101,19 @@ function unwrapApiPayload<TResponse>(payload: unknown): TResponse {
   return payload as TResponse;
 }
 
+function getAuthHeaders(): Record<string, string> {
+  const token = getItem(AUTH_STORAGE_KEY)?.trim();
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
+}
+
+function handleUnauthorized(): void {
+  localStorage.removeItem(AUTH_STORAGE_KEY);
+  if (window.location.pathname !== "/login") {
+    window.location.assign("/login");
+  }
+}
+
 async function request<TResponse, TBody = unknown>(
   url: string,
   options: HttpsRequestOptions<TBody> = {}
@@ -93,6 +126,7 @@ async function request<TResponse, TBody = unknown>(
       credentials: "include", // REQUIRED for ASP.NET cookies
       headers: {
         "Content-Type": "application/json",
+        ...getAuthHeaders(),
         ...headers
       },
       body: body ? JSON.stringify(body) : undefined,
@@ -101,6 +135,9 @@ async function request<TResponse, TBody = unknown>(
 
     if (!res.ok) {
       const errorMessage = await parseErrorMessage(res);
+      if (res.status === 401) {
+        handleUnauthorized();
+      }
       throw new Error(errorMessage);
     }
 

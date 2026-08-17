@@ -7,13 +7,14 @@ import "toastr/build/toastr.min.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { PrimeReactProvider } from 'primereact/api';
+import Tailwind from 'primereact/passthrough/tailwind';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <PrimeReactProvider value={{ unstyled: true }}>
+    <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
       <App />
     </PrimeReactProvider>
   </React.StrictMode>

@@ -18,6 +18,45 @@ module.exports = plugin(function ({ addComponents, theme }) {
       '&.pc-sidebar-hide': {
         '@apply lg:w-0 ltr:border-r-0 rtl:border-l-0': {}
       },
+      '&.pc-sidebar-mini': {
+        '@apply lg:w-sidebar-collapsed-width': {},
+        '.navbar-wrapper': {
+          '@apply lg:w-sidebar-collapsed-width': {}
+        },
+        '.pc-caption': {
+          '@apply lg:opacity-0 lg:overflow-hidden lg:whitespace-nowrap': {}
+        },
+        '.pc-mtext, .pc-arrow, .pc-badge': {
+          '@apply lg:hidden': {}
+        },
+        '.pc-submenu': {
+          '@apply lg:hidden': {}
+        },
+        '.pc-link': {
+          '@apply lg:px-0 lg:text-center': {}
+        },
+        '.pc-micon': {
+          '@apply lg:mx-auto ltr:lg:mr-0 rtl:lg:ml-0': {}
+        },
+        '&:hover': {
+          '@apply lg:w-sidebar-collapsed-active-width lg:shadow-sidebarshadow': {},
+          '.navbar-wrapper': {
+            '@apply lg:w-sidebar-collapsed-active-width': {}
+          },
+          '.pc-caption': {
+            '@apply lg:opacity-100': {}
+          },
+          '.pc-mtext, .pc-arrow': {
+            '@apply lg:inline-block': {}
+          },
+          '.pc-link': {
+            '@apply lg:px-5 ltr:lg:text-left rtl:lg:text-right': {}
+          },
+          '.pc-micon': {
+            '@apply lg:mx-0 ltr:lg:mr-[15px] rtl:lg:ml-[15px]': {}
+          }
+        }
+      },
       '&.mob-sidebar-active': {
         '@apply ltr:max-lg:left-0 rtl:max-lg:right-0': {},
         '.navbar-wrapper': {

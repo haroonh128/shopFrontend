@@ -1,19 +1,32 @@
-import React from 'react'
+interface HeaderProps {
+  onToggleDesktop?: () => void;
+  onToggleMobile?: () => void;
+}
 
-export default function Header() {
+export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps) {
   return (
     <header className="pc-header z-[1027] left-0 right-0 lg:left-sidebar-width">
     <div className="me-auto pc-mob-drp">
       <ul className="inline-flex *:min-h-header-height *:inline-flex *:items-center">
         <li className="pc-h-item pc-sidebar-collapse max-lg:hidden lg:inline-flex">
-          <a href="#" className="pc-head-link ltr:!ml-0 rtl:!mr-0" id="sidebar-hide">
+          <button
+            type="button"
+            className="pc-head-link ltr:!ml-0 rtl:!mr-0"
+            id="sidebar-hide"
+            onClick={onToggleDesktop}
+          >
             <i className="ti ti-menu-2"></i>
-          </a>
+          </button>
         </li>
         <li className="pc-h-item pc-sidebar-popup lg:hidden">
-          <a href="#" className="pc-head-link ltr:!ml-0 rtl:!mr-0" id="mobile-collapse">
+          <button
+            type="button"
+            className="pc-head-link ltr:!ml-0 rtl:!mr-0"
+            id="mobile-collapse"
+            onClick={onToggleMobile}
+          >
             <i className="ti ti-menu-2"></i>
-          </a>
+          </button>
         </li>
         <li className="dropdown pc-h-item">
           <a className="pc-head-link dropdown-toggle me-0 trig-drp-search" data-pc-toggle="dropdown" href="#" role="button"

@@ -19,7 +19,7 @@ export default function Login(){
             }
 
             login(res.accessToken);
-            navigate("/dashboard");
+            navigate("/modules");
         } catch (error) {
             // Request errors are already handled by the shared HTTP client.
             console.error(error);

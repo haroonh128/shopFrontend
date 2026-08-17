@@ -39,6 +39,66 @@
   }
 }
 
+@layer components {
+  .form-input {
+    @apply box-border w-[80%] rounded-md border border-slate-300 px-3 py-2 text-base text-slate-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200;
+  }
+
+  /*
+   * PrimeReact Tailwind PT adds utilities (e.g. p-3, md:w-56) that beat @apply.
+   * Force every .form-input control to the same box.
+   */
+  input.form-input,
+  textarea.form-input,
+  .form-input.p-inputtext {
+    width: 80% !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .form-input[data-pc-name="dropdown"] {
+    display: inline-flex !important;
+    align-items: center;
+    width: 80% !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .form-input[data-pc-name="dropdown"] [data-pc-section="input"],
+  .form-input[data-pc-name="dropdown"] [data-pc-section="label"] {
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    flex: 1 1 auto;
+    min-width: 0;
+    line-height: 1.5rem;
+  }
+
+  .form-input[data-pc-name="dropdown"] [data-pc-section="trigger"] {
+    width: 2rem !important;
+    flex-shrink: 0;
+  }
+
+  .form-input.error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-200;
+  }
+
+  .form-input-label {
+    @apply block text-sm font-medium text-slate-700;
+  }
+  .form-button-primary {
+    @apply bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 w-fit;
+  }
+  .form-button-secondary {
+    @apply bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 w-fit;
+  }
+  .form-button-danger {
+    @apply bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 w-fit;
+  }
+  .form-button-warning {
+    @apply bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 w-fit;
+  }
+}
+
 body {
   margin: 0;
   /* background-color: #b2c2d1; */
