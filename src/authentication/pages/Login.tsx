@@ -1,7 +1,8 @@
 import { useAuth } from "../../auth/hooks";
 import LoginForm from "../components/LoginForm";
 import { login as loginApi } from "../../auth/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setSelectedModuleId } from "../utils/selectedModule";
 
 export default function Login(){
 
@@ -19,6 +20,12 @@ export default function Login(){
             }
 
             login(res.accessToken);
+            const moduleId = res.user?.moduleId;
+            if (moduleId) setSelectedModuleId(moduleId);
+            if (res.user?.isAdmin) {
+              navigate("/admin/users");
+              return;
+            }
             navigate("/modules");
         } catch (error) {
             // Request errors are already handled by the shared HTTP client.
@@ -36,8 +43,8 @@ export default function Login(){
                     <LoginForm onSubmit={handleSubmit} />
 
                 <div className="flex justify-between mt-2">
-                    <a href="/register" className="text-sm text-blue-500 hover:text-blue-600">Don't have an account? Register</a>
-                    <a href="/forgot-password" className="text-sm text-blue-500 hover:text-blue-600">Forgot password?</a>
+                    <Link to="/register" className="text-sm text-blue-500 hover:text-blue-600">Don't have an account? Register</Link>
+                    <Link to="/forgot-password" className="text-sm text-blue-500 hover:text-blue-600">Forgot password?</Link>
                     </div>
                 </div>
             </div>

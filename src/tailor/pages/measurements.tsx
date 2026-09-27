@@ -1,6 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "primereact/button";
 import MeasurementsForm from "../components/measurementsForm";
 import {
     dressTypeLabel,
@@ -23,7 +21,6 @@ const emptyFormValues = (): Partial<measurementFormValues> => ({
 });
 
 const Measurements = () => {
-    const navigate = useNavigate();
     const [view, setView] = useState<"list" | "form">("list");
     const [measurements, setMeasurements] = useState<measurementFormValues[]>([]);
     const [clientOptions, setClientOptions] = useState<ClientOption[]>([]);
@@ -84,14 +81,9 @@ const Measurements = () => {
                 return;
             }
 
-            const created = await createMeasurement(rest);
-            navigate("/costs", {
-                state: {
-                    openForm: true,
-                    clientId: created?.clientId ?? rest.clientId,
-                    measurementId: created?.id,
-                },
-            });
+            await createMeasurement(rest);
+            await loadData();
+            backToList();
         } catch (error) {
             console.error(error);
         }
@@ -128,11 +120,10 @@ const Measurements = () => {
         <div className="card p-6 border-2 border-gray-300 rounded-md">
             <div className="flex items-center justify-between mb-4">
                 <h1 className="text-2xl font-bold">Measurements</h1>
-                <Button
+                <button
                     type="button"
-                    label="Add"
-                    icon="pi pi-plus"
-                    className="form-button-primary"
+                    className="pi pi-plus icon-action"
+                    title="Add"
                     onClick={() => openForm()}
                 />
             </div>
@@ -186,11 +177,13 @@ const Measurements = () => {
                                     <td className="px-3 py-2">
                                         <div className="flex justify-end gap-2">
                                             <i
-                                                className="pi pi-pencil cursor-pointer text-blue-500"
+                                                className="pi pi-pencil icon-action"
+                                                title="Edit"
                                                 onClick={() => openForm(row)}
                                             />
                                             <i
-                                                className="pi pi-trash cursor-pointer text-red-500"
+                                                className="pi pi-trash icon-action icon-action-danger"
+                                                title="Delete"
                                                 onClick={() => void handleDelete(row)}
                                             />
                                         </div>

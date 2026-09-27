@@ -6,6 +6,7 @@ import { verifyOtp } from '../../auth/api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import { setItem, setItemAsObject } from '../../shared';
 import { useAuth } from '../../auth/hooks';
+import { setSelectedModuleId } from '../utils/selectedModule';
 
 const formSchema = Yup.object({
   code: Yup.string().required('Code is required'),
@@ -24,6 +25,11 @@ export default function Otp() {
         login(res?.accessToken || '');
         setItem("auth", res?.accessToken || '');
         setItemAsObject("user", res?.user || {});
+        if (res.user?.moduleId) setSelectedModuleId(res.user.moduleId);
+        if (res.user?.isAdmin) {
+          navigate("/admin/users");
+          return;
+        }
         navigate("/modules");
       }
     },

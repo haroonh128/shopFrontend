@@ -9,12 +9,33 @@ import reportWebVitals from './reportWebVitals';
 import { PrimeReactProvider } from 'primereact/api';
 import Tailwind from 'primereact/passthrough/tailwind';
 
+/** Compact buttons: PrimeReact Tailwind PT defaults to px-4 py-3 text-base. */
+const compactTailwind = {
+  ...Tailwind,
+  button: {
+    ...Tailwind.button,
+    root: (options: any) => {
+      const props = { ...options.props, size: options.props?.size ?? "small" };
+      const rootPt = (Tailwind as any).button?.root;
+      return typeof rootPt === "function" ? rootPt({ ...options, props }) : rootPt;
+    },
+    label: (options: any) => {
+      const labelPt = (Tailwind as any).button?.label;
+      const base = typeof labelPt === "function" ? labelPt(options) : labelPt;
+      const className = String(base?.className ?? "")
+        .replace(/\bflex-1\b/g, "flex-none")
+        .replace(/\bfont-bold\b/g, "font-medium");
+      return { ...(base ?? {}), className: className || "flex-none font-medium" };
+    },
+  },
+};
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <PrimeReactProvider value={{ unstyled: true, pt: Tailwind }}>
+    <PrimeReactProvider value={{ unstyled: true, pt: compactTailwind }}>
       <App />
     </PrimeReactProvider>
   </React.StrictMode>

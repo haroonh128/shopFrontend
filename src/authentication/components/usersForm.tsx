@@ -67,8 +67,17 @@ export default function UsersForm({ initialValues, onSubmit, onCancel }: UsersFo
                 {({ isSubmitting, values, setFieldValue, setFieldTouched }) => (
                     <Form>
                         <div className="flex flex-col gap-2 mt-5">
-                            <div className="flex justify-start">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                                 <h1 className="text-2xl font-bold">{values.id ? "Edit User" : "Add User"}</h1>
+                                {onCancel && (
+                                    <button
+                                        type="button"
+                                        className="pi pi-arrow-left icon-action"
+                                        title="Back"
+                                        disabled={isSubmitting}
+                                        onClick={onCancel}
+                                    />
+                                )}
                             </div>
                             <div className="grid grid-cols-2 gap-2">
                                 <Field name="name">
@@ -187,12 +196,11 @@ export default function UsersForm({ initialValues, onSubmit, onCancel }: UsersFo
                                 {onCancel && (
                                     <Button
                                         type="button"
+                                        label="Back"
                                         className="form-button-secondary"
                                         disabled={isSubmitting}
                                         onClick={onCancel}
-                                    >
-                                        Cancel
-                                    </Button>
+                                    />
                                 )}
                             </div>
                     </Form>

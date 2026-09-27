@@ -1,16 +1,6 @@
-export type Pill = {
-  id: string;
-  label: string;
-  /** When set, choosing this pill navigates here */
-  to?: string;
-};
+import type { ModuleEntry, Pill } from "../config/modules";
 
-export type ModuleEntry = {
-  id: string;
-  title: string;
-  icon: string;
-  pills?: Pill[];
-};
+export type { ModuleEntry, Pill };
 
 export type ModuleRowProps = {
   entry: ModuleEntry;

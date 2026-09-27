@@ -86,16 +86,94 @@
     @apply block text-sm font-medium text-slate-700;
   }
   .form-button-primary {
-    @apply bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 w-fit;
+    @apply bg-indigo-500 text-white rounded-md hover:bg-indigo-600;
   }
   .form-button-secondary {
-    @apply bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 w-fit;
+    @apply bg-gray-500 text-white rounded-md hover:bg-gray-600;
   }
   .form-button-danger {
-    @apply bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 w-fit;
+    @apply bg-red-500 text-white rounded-md hover:bg-red-600;
   }
   .form-button-warning {
-    @apply bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 w-fit;
+    @apply bg-yellow-500 text-white rounded-md hover:bg-yellow-600;
+  }
+
+  /*
+   * PrimeReact Tailwind PT defaults buttons to px-4 py-3 text-base (+ flex-1 label).
+   * Force compact size for our form buttons.
+   */
+  button.form-button-primary,
+  button.form-button-secondary,
+  button.form-button-danger,
+  button.form-button-warning,
+  .form-button-primary[data-pc-name="button"],
+  .form-button-secondary[data-pc-name="button"],
+  .form-button-danger[data-pc-name="button"],
+  .form-button-warning[data-pc-name="button"] {
+    width: fit-content !important;
+    min-width: 0 !important;
+    height: auto !important;
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.25rem !important;
+    font-weight: 500 !important;
+  }
+
+  .form-button-primary [data-pc-section="label"],
+  .form-button-secondary [data-pc-section="label"],
+  .form-button-danger [data-pc-section="label"],
+  .form-button-warning [data-pc-section="label"],
+  .form-button-primary .p-button-label,
+  .form-button-secondary .p-button-label,
+  .form-button-danger .p-button-label,
+  .form-button-warning .p-button-label {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    font-weight: 500 !important;
+    font-size: inherit !important;
+  }
+
+  .form-button-primary.form-button-primary {
+    background-color: rgb(99 102 241) !important;
+    border-color: rgb(99 102 241) !important;
+    color: #fff !important;
+  }
+  .form-button-primary:hover {
+    background-color: rgb(79 70 229) !important;
+    border-color: rgb(79 70 229) !important;
+  }
+  .form-button-secondary.form-button-secondary {
+    background-color: rgb(107 114 128) !important;
+    border-color: rgb(107 114 128) !important;
+    color: #fff !important;
+  }
+  .form-button-secondary:hover {
+    background-color: rgb(75 85 99) !important;
+    border-color: rgb(75 85 99) !important;
+  }
+  .form-button-danger.form-button-danger {
+    background-color: rgb(239 68 68) !important;
+    border-color: rgb(239 68 68) !important;
+    color: #fff !important;
+  }
+  .form-button-danger:hover {
+    background-color: rgb(220 38 38) !important;
+    border-color: rgb(220 38 38) !important;
+  }
+
+  .icon-action {
+    @apply inline-flex items-center justify-center p-0 m-0 border-0 bg-transparent
+      text-base leading-none text-slate-600 hover:text-indigo-600
+      cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .icon-action-danger {
+    @apply text-red-600 hover:text-red-700;
+  }
+  .icon-action-success {
+    @apply text-green-700 hover:text-green-800;
+  }
+  .icon-action-warning {
+    @apply text-amber-600 hover:text-amber-700;
   }
 }
 
@@ -111,6 +189,41 @@ body {
   background-size:cover;
   background-position: center;
 background-repeat: no-repeat;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-document,
+  .print-document * {
+    visibility: visible;
+  }
+
+  .print-document {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    padding: 12mm;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .no-print,
+  .pc-sidebar,
+  .pc-header,
+  .pc-mobile-fixed,
+  nav,
+  .nprogress-busy {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
 }
 
 

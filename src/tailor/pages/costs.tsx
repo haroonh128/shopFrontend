@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Button } from "primereact/button";
 import CostForm from "../components/costForm";
 import { costFormValues, formatMoney, pendingAmount } from "../models/cost.model";
 import {
@@ -144,11 +143,10 @@ const Costs = () => {
         <div className="card p-6 border-2 border-gray-300 rounded-md">
             <div className="flex items-center justify-between mb-4">
                 <h1 className="text-2xl font-bold">Costs</h1>
-                <Button
+                <button
                     type="button"
-                    label="Add"
-                    icon="pi pi-plus"
-                    className="form-button-primary"
+                    className="pi pi-plus icon-action"
+                    title="Add"
                     onClick={() => openForm()}
                 />
             </div>
@@ -198,11 +196,13 @@ const Costs = () => {
                                     <td className="px-3 py-2">
                                         <div className="flex justify-end gap-2">
                                             <i
-                                                className="pi pi-pencil cursor-pointer text-blue-500"
+                                                className="pi pi-pencil icon-action"
+                                                title="Edit"
                                                 onClick={() => openForm(row)}
                                             />
                                             <i
-                                                className="pi pi-trash cursor-pointer text-red-500"
+                                                className="pi pi-trash icon-action icon-action-danger"
+                                                title="Delete"
                                                 onClick={() => void handleDelete(row)}
                                             />
                                         </div>

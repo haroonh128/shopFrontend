@@ -16,7 +16,7 @@ export default function Sidebar({ collapsed, mobileActive, onCloseMobile }: Side
       >
         <div className="navbar-wrapper">
           <div className="m-header flex items-center py-4 px-6 h-header-height">
-            <a href="../dashboard/index.html" className="b-brand flex items-center gap-3">
+            <a href="/modules" className="b-brand flex items-center gap-3">
               <img src="/images/logo-white.svg" className="img-fluid logo logo-lg" alt="logo" />
               <img src="/images/favicon.svg" className="img-fluid logo logo-sm" alt="logo" />
             </a>

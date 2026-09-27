@@ -1,9 +1,23 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/hooks";
+import { clearSelectedModuleId } from "../../authentication/utils/selectedModule";
+
 interface HeaderProps {
   onToggleDesktop?: () => void;
   onToggleMobile?: () => void;
 }
 
 export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    logout();
+    clearSelectedModuleId();
+    navigate("/login", { replace: true });
+  };
+
   return (
     <header className="pc-header z-[1027] left-0 right-0 lg:left-sidebar-width">
     <div className="me-auto pc-mob-drp">
@@ -72,32 +86,32 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
             <i className="ti ti-settings"></i>
           </a>
           <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
-            <a href="#!" className="dropdown-item">
+            {/* <a href="#!" className="dropdown-item">
               <i className="ti ti-user"></i>
               <span>My Account</span>
-            </a>
-            <a href="#!" className="dropdown-item">
+            </a> */}
+            {/* <a href="#!" className="dropdown-item">
               <i className="ti ti-settings"></i>
               <span>Settings</span>
-            </a>
-            <a href="#!" className="dropdown-item">
+            </a> */}
+            {/* <a href="#!" className="dropdown-item">
               <i className="ti ti-headset"></i>
               <span>Support</span>
-            </a>
-            <a href="#!" className="dropdown-item">
+            </a> */}
+            {/* <a href="#!" className="dropdown-item">
               <i className="ti ti-lock"></i>
               <span>Lock Screen</span>
-            </a>
-            <a href="#!" className="dropdown-item">
+            </a> */}
+            <button type="button" className="dropdown-item" onClick={handleLogout}>
               <i className="ti ti-power"></i>
               <span>Logout</span>
-            </a>
+            </button>
           </div>
         </li>
-        <li className="dropdown pc-h-item">
+        {/*<li className="dropdown pc-h-item">
           <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" aria-expanded="false">
-            <i className="ti ti-bell"></i>
+             <i className="ti ti-bell"></i>
             <span className="badge bg-success-500 text-white rounded-full z-10 absolute right-0 top-0">3</span>
           </a>
           <div className="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown p-2">
@@ -203,8 +217,8 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
               </a>
             </div>
           </div>
-        </li>
-        <li className="dropdown pc-h-item header-user-profile">
+        </li> */}
+        {/* <li className="dropdown pc-h-item header-user-profile">
           <a className="pc-head-link dropdown-toggle arrow-none me-0" data-pc-toggle="dropdown" href="#" role="button"
             aria-haspopup="false" data-pc-auto-close="outside" aria-expanded="false">
             <i className="ti ti-user-circle"></i>
@@ -258,7 +272,7 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
               </div>
             </div>
           </div>
-        </li>
+        </li> */}
       </ul>
     </div>
     </header>

@@ -3,7 +3,9 @@ export interface JwtUser {
     sub: string;
     email: string;
     role: string;
+    isAdmin?: string | boolean;
     exp: number;
+    moduleId?: string;
   }
   
   export interface LoginRequest {
@@ -20,6 +22,9 @@ export interface JwtUser {
       id: string;
       phoneNumber: string;
       isTwoFactorEnabled: boolean;
+      moduleId?: string | null;
+      isAdmin?: boolean;
+      subscriptionValidUntil?: string | null;
     }
   }
   

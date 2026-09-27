@@ -8,4 +8,5 @@ export interface registrationFormValues {
     isTwoFactorEnabled: boolean;
     cnic: string;
     appType: string;
+    moduleId: string;
 }

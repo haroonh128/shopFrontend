@@ -5,6 +5,12 @@ import { Button } from 'primereact/button';
 import { Checkbox } from 'primereact/checkbox';
 import { Dropdown } from 'primereact/dropdown';
 import { registrationFormValues } from "../models/registration.model";
+import { MODULES, ADMIN_MODULE_ID } from "../config/modules";
+
+const moduleOptions = MODULES.filter((m) => m.id !== ADMIN_MODULE_ID).map((m) => ({
+  label: m.title,
+  value: m.id,
+}));
 
 const formSchema = Yup.object({
     phoneNumber: Yup.string().min(12, 'Phone number must be 13 digits').required('Phone number is required'),
@@ -15,12 +21,13 @@ const formSchema = Yup.object({
     email: Yup.string().email('Invalid email').required('Email is required'),
     isTwoFactorEnabled: Yup.boolean().required('Is two factor enabled is required'),
     cnic: Yup.string().required('Cnic is required'),
-    appType: Yup.string().required('App type is required'),
+    appType: Yup.string(),
+    moduleId: Yup.string().required('Module is required'),
 });
 export default function RegistrationForm({ onSubmit }: { onSubmit: (values: registrationFormValues) => void }) {
     return (
     <Formik<registrationFormValues>
-      initialValues={{ phoneNumber: '', pin: '', confirmPin: '', firstName: '', lastName: '', email: '', isTwoFactorEnabled: false, cnic: '', appType: '' }}
+      initialValues={{ phoneNumber: '', pin: '', confirmPin: '', firstName: '', lastName: '', email: '', isTwoFactorEnabled: false, cnic: '', appType: 'web', moduleId: '' }}
       validationSchema={formSchema}
       onSubmit={onSubmit}
     >
@@ -237,7 +244,40 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
               </small>
             ) : null}
           </div>
-          <div className="flex items-center gap-2 w-full">
+          <div className="w-full">
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              Module
+            </label>
+            <Field name="moduleId">
+              {({ field, form }: any) => (
+                <Dropdown
+                  id="moduleId"
+                  value={field.value}
+                  onChange={(e) => form.setFieldValue(field.name, e.value ?? '')}
+                  onBlur={() => form.setFieldTouched(field.name, true)}
+                  options={moduleOptions}
+                  optionLabel="label"
+                  optionValue="value"
+                  placeholder="Select Module"
+                  className={[
+                    "w-full",
+                    errors.moduleId && touched.moduleId ? "p-invalid" : "",
+                  ].join(" ")}
+                  filter
+                  showClear
+                />
+              )}
+            </Field>
+            {errors.moduleId && touched.moduleId ? (
+              <small className="mt-1 block text-sm text-red-600">
+                {errors.moduleId}
+              </small>
+            ) : null}
+          </div>
+          {/* <div className="w-full">
+            <label className="mb-1 block text-sm font-medium text-slate-700">
+              App Type
+            </label>
             <Field name="appType">
               {({ field, form }: any) => (
                 <Dropdown
@@ -252,7 +292,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
                   optionLabel="label"
                   optionValue="value"
                   placeholder="Select App Type"
-                  className="form-input"
+                  className="w-full"
                   filter
                   showClear
                 />
@@ -263,7 +303,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
                 {errors.appType}
               </small>
             ) : null}
-        </div>
+          </div> */}
           <Button
             type="submit"
             label="Register"
