@@ -1,20 +1,19 @@
-// import React from 'react';
-// import logo from './logo.svg';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './auth/context/AuthContext';
-// import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from './core/theme';
 import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
-    // <ThemeProvider>
-    <AuthProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </AuthProvider>
-  // </ThemeProvider> 
+    <ThemeProvider>
+      <AuthProvider>
+        {/* HashRouter avoids 404 on refresh when the host has no SPA fallback */}
+        <HashRouter>
+          <AppRoutes />
+        </HashRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

@@ -247,7 +247,7 @@ export default function ConsultationFormPage() {
                       options={doctorOptions}
                       filter
                       placeholder="Select doctor"
-                      className="w-full"
+                      className="form-input"
                       onChange={(e) => {
                         setFieldValue("doctorId", e.value);
                         const doc = doctors.find((d) => d.id === e.value);

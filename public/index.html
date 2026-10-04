@@ -32,6 +32,20 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Shop</title>
+    <script>
+      (function () {
+        try {
+          var pref = localStorage.getItem('theme');
+          var resolved =
+            pref === 'dark' || pref === 'light'
+              ? pref
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.setAttribute('data-pc-theme', resolved);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

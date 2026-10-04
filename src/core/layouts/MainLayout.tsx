@@ -7,7 +7,7 @@ export default function MainLayout({ children }: any) {
   const [mobileActive, setMobileActive] = useState(false);
 
   return (
-    <div className="bg-theme-bodybg min-h-screen">
+    <div className="bg-theme-bodybg dark:bg-themedark-bodybg min-h-screen text-theme-bodycolor dark:text-themedark-bodycolor">
       <Sidebar
         collapsed={sidebarCollapsed}
         mobileActive={mobileActive}

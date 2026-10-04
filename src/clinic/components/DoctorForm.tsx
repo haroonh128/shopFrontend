@@ -133,7 +133,7 @@ export default function DoctorForm({ initialValues, onSubmit, onCancel }: Props)
                     { label: "No", value: false },
                   ]}
                   onChange={(e) => setFieldValue("active", e.value)}
-                  className="w-full"
+                  className="form-input"
                 />
               </div>
               <Field name="address">

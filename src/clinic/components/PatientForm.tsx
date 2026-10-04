@@ -88,7 +88,7 @@ export default function PatientForm({ initialValues, onSubmit, onCancel }: Props
                   value={values.gender}
                   options={genderOptions}
                   onChange={(e) => setFieldValue("gender", e.value)}
-                  className="w-full"
+                  className="form-input"
                 />
                 <ErrorMessage name="gender" component="div" className="text-red-500 text-sm" />
               </div>
@@ -108,7 +108,7 @@ export default function PatientForm({ initialValues, onSubmit, onCancel }: Props
                   options={maritalStatusOptions}
                   showClear
                   onChange={(e) => setFieldValue("maritalStatus", e.value)}
-                  className="w-full"
+                  className="form-input"
                 />
               </div>
               <Field name="contactNumber">
@@ -142,7 +142,7 @@ export default function PatientForm({ initialValues, onSubmit, onCancel }: Props
                   options={bloodGroupOptions}
                   showClear
                   onChange={(e) => setFieldValue("bloodGroup", e.value)}
-                  className="w-full"
+                  className="form-input"
                 />
               </div>
               <Field name="address">

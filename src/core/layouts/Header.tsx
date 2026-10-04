@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/hooks";
 import { clearSelectedModuleId } from "../../authentication/utils/selectedModule";
+import { useTheme, type ThemePreference } from "../theme";
 
 interface HeaderProps {
   onToggleDesktop?: () => void;
@@ -10,12 +11,18 @@ interface HeaderProps {
 export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps) {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { preference, resolved, setTheme } = useTheme();
 
   const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault();
     logout();
     clearSelectedModuleId();
     navigate("/login", { replace: true });
+  };
+
+  const handleThemeChange = (next: ThemePreference) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setTheme(next);
   };
 
   return (
@@ -59,25 +66,34 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
       <ul className="inline-flex *:min-h-header-height *:inline-flex *:items-center">
         <li className="dropdown pc-h-item">
           <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
-            aria-haspopup="false" aria-expanded="false">
-            <i className="ti ti-sun"></i>
+            aria-haspopup="true" aria-expanded="false" aria-label="Theme">
+            <i className={resolved === "dark" ? "ti ti-moon" : "ti ti-sun"}></i>
           </a>
           <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
-          {/* onClick={() => layout_change('dark')} */}
-            <a href="#!" className="dropdown-item" >
+            <button
+              type="button"
+              className={`dropdown-item${preference === "dark" ? " active" : ""}`}
+              onClick={handleThemeChange("dark")}
+            >
               <i className="ti ti-moon"></i>
               <span>Dark</span>
-            </a>
-            {/* onClick={() => layout_change('light')} */}
-            <a href="#!" className="dropdown-item" >
+            </button>
+            <button
+              type="button"
+              className={`dropdown-item${preference === "light" ? " active" : ""}`}
+              onClick={handleThemeChange("light")}
+            >
               <i className="ti ti-sun"></i>
               <span>Light</span>
-            </a>
-            {/* onClick={() => layout_change_default()} */}
-            <a href="#!" className="dropdown-item" >
+            </button>
+            <button
+              type="button"
+              className={`dropdown-item${preference === "default" ? " active" : ""}`}
+              onClick={handleThemeChange("default")}
+            >
               <i className="ti ti-settings"></i>
               <span>Default</span>
-            </a>
+            </button>
           </div>
         </li>
         <li className="dropdown pc-h-item">

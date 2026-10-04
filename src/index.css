@@ -37,6 +37,26 @@
     --themedark-headercolor: 248 249 250;
     --themedark-activebg: 255 255 255;
   }
+
+  /* Keep theme-* tokens in sync so surfaces without dark: variants still flip */
+  html[data-pc-theme="dark"] {
+    --theme-headings: 248 249 250;
+    --theme-bodycolor: 206 212 218;
+    --theme-secondarytextcolor: 173 181 189;
+    --theme-bodybg: 18 20 24;
+    --theme-cardbg: 26 29 34;
+    --theme-border: 52 58 64;
+    --theme-inputborder: 73 80 87;
+    --theme-inputbg: 26 29 34;
+    --theme-headerbg: 26 29 34;
+    --theme-headercolor: 248 249 250;
+    --theme-activebg: 255 255 255;
+    color-scheme: dark;
+  }
+
+  html[data-pc-theme="light"] {
+    color-scheme: light;
+  }
 }
 
 @layer components {
@@ -53,6 +73,11 @@
   .form-input.p-inputtext {
     width: 80% !important;
     padding: 0.5rem 0.75rem !important;
+  }
+
+  /* PT defaults dropdown to `w-full md:w-56`; honor explicit full-width. */
+  [data-pc-name="dropdown"].w-full {
+    width: 100% !important;
   }
 
   .form-input[data-pc-name="dropdown"] {

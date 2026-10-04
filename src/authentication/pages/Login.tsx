@@ -43,7 +43,7 @@ export default function Login(){
                     <LoginForm onSubmit={handleSubmit} />
 
                 <div className="flex justify-between mt-2">
-                    <Link to="/register" className="text-sm text-blue-500 hover:text-blue-600">Don't have an account? Register</Link>
+                    {/* <Link to="/register" className="text-sm text-blue-500 hover:text-blue-600">Don't have an account? Register</Link> */}
                     <Link to="/forgot-password" className="text-sm text-blue-500 hover:text-blue-600">Forgot password?</Link>
                     </div>
                 </div>

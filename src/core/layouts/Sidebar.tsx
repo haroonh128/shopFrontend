@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MenuList from "./MenuList";
 
 interface SidebarProps {
@@ -16,10 +17,10 @@ export default function Sidebar({ collapsed, mobileActive, onCloseMobile }: Side
       >
         <div className="navbar-wrapper">
           <div className="m-header flex items-center py-4 px-6 h-header-height">
-            <a href="/modules" className="b-brand flex items-center gap-3">
+            <Link to="/modules" className="b-brand flex items-center gap-3">
               <img src="/images/logo-white.svg" className="img-fluid logo logo-lg" alt="logo" />
               <img src="/images/favicon.svg" className="img-fluid logo logo-sm" alt="logo" />
-            </a>
+            </Link>
           </div>
           <div className="navbar-content h-[calc(100vh_-_74px)] py-2.5">
             <ul className="pc-navbar">

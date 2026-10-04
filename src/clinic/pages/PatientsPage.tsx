@@ -123,9 +123,9 @@ export default function PatientsPage() {
           showClear
           placeholder="Gender"
           onChange={(e) => setFilters((f) => ({ ...f, gender: e.value || "" }))}
-          className="w-full"
+          className="form-input"
         />
-        <div className="flex gap-2">
+        <div className="flex gap-2 ms-auto">
           <Button label="Search" className="form-button-primary" onClick={handleSearch} />
           <Button label="Clear" className="form-button-secondary" onClick={clearFilters} />
         </div>

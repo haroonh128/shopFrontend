@@ -148,7 +148,7 @@ export default function AdminUserForm({ initialValues, onSubmit, onCancel }: Pro
                   value={values.moduleId}
                   options={moduleOptions}
                   onChange={(e) => setFieldValue("moduleId", e.value ?? "")}
-                  className="w-full"
+                  className="form-input"
                   placeholder="Select module"
                 />
               </div>

@@ -260,7 +260,7 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
                   optionValue="value"
                   placeholder="Select Module"
                   className={[
-                    "w-full",
+                    "form-input",
                     errors.moduleId && touched.moduleId ? "p-invalid" : "",
                   ].join(" ")}
                   filter

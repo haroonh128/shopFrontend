@@ -38,3 +38,19 @@ export const register = (data: registrationFormValues) =>
 
 export const verifyOtp = (data: { phoneNumber: string, otpCode: string }) =>
   http.post<AuthResponse, { phoneNumber: string, otpCode: string }>("/Auth/verify-otp", data);
+
+export const forgotPassword = (data: { email: string }) =>
+  http.post<boolean, { email: string }>("/Auth/forgot-password", data);
+
+export const resetPassword = (data: {
+  email: string;
+  otpCode: string;
+  newPin: string;
+  confirmNewPin: string;
+}) =>
+  http.post<boolean, {
+    email: string;
+    otpCode: string;
+    newPin: string;
+    confirmNewPin: string;
+  }>("/Auth/reset-password", data);

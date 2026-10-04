@@ -16,7 +16,14 @@ var dark_flag = false;
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof Storage !== 'undefined') {
-    layout_change(localStorage.getItem('theme'));
+    var storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || storedTheme === 'light') {
+      layout_change(storedTheme);
+    } else {
+      // "default" or unset — follow OS preference without overwriting storage
+      var resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-pc-theme', resolved);
+    }
   }
 });
 // Function to change layout dark/light settings
@@ -24,20 +31,19 @@ function layout_change_default() {
   // Determine initial layout based on user's color scheme preference
   let dark_layout = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
-  // Apply the determined layout
-  layout_change(dark_layout);
+  try {
+    localStorage.setItem('theme', 'default');
+  } catch (e) {}
+
+  // Apply the determined layout (do not persist resolved value over "default")
+  document.documentElement.setAttribute('data-pc-theme', dark_layout);
+  dark_flag = dark_layout === 'dark';
 
   // Set the active state for the default layout button
   const btn_control = document.querySelector('.theme-layout .btn[data-value="default"]');
   if (btn_control) {
     btn_control.classList.add('active');
   }
-
-  // Listen for changes in the user's color scheme preference and adjust layout accordingly
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
-    dark_layout = event.matches ? 'dark' : 'light';
-    layout_change(dark_layout);
-  });
 }
 
 // This event listener executes when the DOM content is fully loaded
@@ -310,8 +316,16 @@ function layout_rtl_change(value) {
 
 // Function to handle layout change (dark/light) and update related elements
 function layout_change(layout) {
+  if (layout !== 'dark' && layout !== 'light') {
+    return;
+  }
+
   // Set the theme layout attribute on the <html> tag
   document.getElementsByTagName('html')[0].setAttribute('data-pc-theme', layout);
+
+  try {
+    localStorage.setItem('theme', layout);
+  } catch (e) {}
 
   // Remove the 'active' class from the default layout button if it exists
   var btn_control = document.querySelector('.theme-layout .btn[data-value="default"]');
