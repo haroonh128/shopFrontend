@@ -1,29 +1,24 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../auth/hooks";
-import { ADMIN_MODULE_ID, MODULES, isAdminFromAuth } from "../config/modules";
+import { getModuleHomePath, getVisibleModules } from "../config/modules";
 import ModuleRow, { type Pill } from "./ModuleRow";
 import { setSelectedModuleId } from "../utils/selectedModule";
 
 export default function Modules() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const isAdmin = isAdminFromAuth(user);
 
-  const visibleModules = useMemo(() => {
-    const productModules = MODULES.filter((m) => m.id !== ADMIN_MODULE_ID);
-    const scoped = user?.moduleId
-      ? productModules.filter((m) => m.id === user.moduleId)
-      : productModules;
+  const visibleModules = useMemo(() => getVisibleModules(user), [user]);
 
-    if (isAdmin) {
-      const adminModule = MODULES.find((m) => m.id === ADMIN_MODULE_ID);
-      return adminModule ? [...scoped, adminModule] : scoped;
-    }
-
-    return scoped;
-  }, [user?.moduleId, isAdmin]);
+  useEffect(() => {
+    if (visibleModules.length !== 1) return;
+    const only = visibleModules[0];
+    setSelectedModuleId(only.id);
+    const home = getModuleHomePath(only);
+    if (home) navigate(home, { replace: true });
+  }, [visibleModules, navigate]);
 
   const [activeModuleId, setActiveModuleId] = useState(
     visibleModules[0]?.id ?? ""
@@ -39,8 +34,17 @@ export default function Modules() {
     if (pill.to) navigate(pill.to);
   };
 
+  if (visibleModules.length === 1) return null;
+
   return (
     <div className="mx-auto max-w-6xl px-3 py-2 sm:px-6 sm:py-4 md:px-10 lg:px-14 xl:px-16">
+      <div className="mb-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0d7a68]">Workspace</p>
+        <h1 className="mt-1 text-2xl font-semibold">Where would you like to work?</h1>
+        <p className="mt-1 text-sm text-theme-secondarytextcolor dark:text-themedark-secondarytextcolor">
+          Open a module and continue from the last place you left it.
+        </p>
+      </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {visibleModules.map((m) => (
           <ModuleRow

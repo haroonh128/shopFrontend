@@ -49,8 +49,8 @@ export default function PracticePage() {
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            const updated = await updateCurrentPractice(values);
-            setPractice(updated);
+            await updateCurrentPractice(values);
+            navigate("/clinic/patients");
           } finally {
             setSubmitting(false);
           }

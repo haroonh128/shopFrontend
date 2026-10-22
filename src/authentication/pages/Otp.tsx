@@ -6,6 +6,7 @@ import { verifyOtp } from '../../auth/api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import { setItem, setItemAsObject } from '../../shared';
 import { useAuth } from '../../auth/hooks';
+import { getPostAuthPath } from '../config/modules';
 import { setSelectedModuleId } from '../utils/selectedModule';
 
 const formSchema = Yup.object({
@@ -26,11 +27,7 @@ export default function Otp() {
         setItem("auth", res?.accessToken || '');
         setItemAsObject("user", res?.user || {});
         if (res.user?.moduleId) setSelectedModuleId(res.user.moduleId);
-        if (res.user?.isAdmin) {
-          navigate("/admin/users");
-          return;
-        }
-        navigate("/modules");
+        navigate(getPostAuthPath(res.user));
       }
     },
     onReset: () => {

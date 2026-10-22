@@ -6,7 +6,7 @@ import { Dropdown } from "primereact/dropdown";
 import PatientForm from "../components/PatientForm";
 import type { Patient, PatientSearchParams } from "../models/clinic.models";
 import { createPatient, searchPatients, updatePatient } from "../services/clinic.service";
-import { genderOptions } from "../utils/clinic.utils";
+import { genderLabel, genderOptions } from "../utils/clinic.utils";
 
 const emptyFilters: PatientSearchParams = {
   mrNumber: "",
@@ -161,7 +161,7 @@ export default function PatientsPage() {
                 <td className="p-2 font-semibold">{p.mrNumber}</td>
                 <td className="p-2">{p.fullName}</td>
                 <td className="p-2">{p.age ?? "—"}</td>
-                <td className="p-2">{p.gender}</td>
+                <td className="p-2">{genderLabel(p.gender)}</td>
                 <td className="p-2">{p.contactNumber || "—"}</td>
                 <td className="p-2">{p.lastVisitDate ? new Date(p.lastVisitDate).toLocaleDateString() : "—"}</td>
                 <td className="p-2">{p.lastDoctorName || "—"}</td>

@@ -8,7 +8,7 @@ import {
   getPatientConsultations,
   updatePatient,
 } from "../services/clinic.service";
-import { bloodGroupLabel, formatCurrency } from "../utils/clinic.utils";
+import { bloodGroupLabel, formatCurrency, genderLabel } from "../utils/clinic.utils";
 
 type Tab = "overview" | "consultations";
 
@@ -81,7 +81,7 @@ export default function PatientProfilePage() {
             <h1 className="text-3xl font-bold">{patient.fullName}</h1>
             <div className="mt-2 text-sm text-slate-700 flex flex-wrap gap-x-4 gap-y-1">
               <span>Age: {patient.age ?? "—"}</span>
-              <span>Gender: {patient.gender}</span>
+              <span>Gender: {genderLabel(patient.gender)}</span>
               <span>Contact: {patient.contactNumber || "—"}</span>
               <span>Blood Group: {bloodGroupLabel(patient.bloodGroup)}</span>
             </div>

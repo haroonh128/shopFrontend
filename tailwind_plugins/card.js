@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin');
 module.exports = plugin(function ({ addComponents }) {
   addComponents({
     '.card': {
-      '@apply relative mb-6 bg-theme-cardbg dark:bg-themedark-cardbg shadow-[0_1px_20px_0_rgba(69,90,100,0.08)] dark:shadow-[none]':
+      '@apply relative mb-6 rounded-2xl bg-theme-cardbg dark:bg-themedark-cardbg shadow-[0_18px_40px_-28px_rgba(16,40,36,0.45)] dark:shadow-[none]':
         {},
 
       '.card-header': {

@@ -32,7 +32,7 @@ const validationSchema = Yup.object({
 
 const defaults: Patient = {
   fullName: "",
-  gender: "Male",
+  gender: "male",
   contactNumber: "",
   alternateContactNumber: "",
   email: "",

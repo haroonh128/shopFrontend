@@ -107,10 +107,27 @@ function getAuthHeaders(): Record<string, string> {
   return { Authorization: `Bearer ${token}` };
 }
 
+function getHashPath(): string {
+  const hash = window.location.hash.replace(/^#/, "") || "/";
+  return hash.split("?")[0] || "/";
+}
+
+function isOnPublicAuthPage(): boolean {
+  const path = getHashPath();
+  return (
+    path === "/" ||
+    path === "/login" ||
+    path === "/register" ||
+    path === "/otp" ||
+    path === "/forgot-password"
+  );
+}
+
 function handleUnauthorized(): void {
   localStorage.removeItem(AUTH_STORAGE_KEY);
-  if (window.location.pathname !== "/login") {
-    window.location.assign("/login");
+  // HashRouter keeps the SPA path in the hash; pathname alone is usually "/".
+  if (!isOnPublicAuthPage()) {
+    window.location.assign("/#/login");
   }
 }
 
@@ -162,7 +179,11 @@ async function request<TResponse, TBody = unknown>(
     }
 
     if (error instanceof Error) {
-      toastr.error(error.message || "Something went wrong", "Request failed");
+      const message = error.message || "Something went wrong";
+      const title = /subscription has expired/i.test(message)
+        ? "Subscription expired"
+        : "Request failed";
+      toastr.error(message, title);
       throw error;
     }
 

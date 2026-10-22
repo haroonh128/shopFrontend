@@ -6,6 +6,7 @@ import { Checkbox } from 'primereact/checkbox';
 import { Dropdown } from 'primereact/dropdown';
 import { registrationFormValues } from "../models/registration.model";
 import { MODULES, ADMIN_MODULE_ID } from "../config/modules";
+import { requiredPhoneSchema } from "../../core/utils/phone";
 
 const moduleOptions = MODULES.filter((m) => m.id !== ADMIN_MODULE_ID).map((m) => ({
   label: m.title,
@@ -13,7 +14,7 @@ const moduleOptions = MODULES.filter((m) => m.id !== ADMIN_MODULE_ID).map((m) =>
 }));
 
 const formSchema = Yup.object({
-    phoneNumber: Yup.string().min(12, 'Phone number must be 13 digits').required('Phone number is required'),
+    phoneNumber: requiredPhoneSchema(),
     pin: Yup.string().min(4, 'Pin hash must be 4 digits').required('Pin hash is required'),
     confirmPin: Yup.string().min(4, 'Confirm pin must be 4 digits').required('Confirm pin is required'),
     firstName: Yup.string().required('First name is required'),
@@ -29,9 +30,11 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
     <Formik<registrationFormValues>
       initialValues={{ phoneNumber: '', pin: '', confirmPin: '', firstName: '', lastName: '', email: '', isTwoFactorEnabled: false, cnic: '', appType: 'web', moduleId: '' }}
       validationSchema={formSchema}
+      validateOnBlur
+      validateOnChange
       onSubmit={onSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, submitCount }) => (
         <Form className="space-y-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">
@@ -41,21 +44,24 @@ export default function RegistrationForm({ onSubmit }: { onSubmit: (values: regi
               {({ field }: any) => (
                 <InputText
                   {...field}
-                  inputMode="numeric"
+                  inputMode="tel"
                   autoComplete="tel"
-                  minLength={12}
-                  maxLength={13}
+                  placeholder="+92... or 03..."
+                  maxLength={14}
                   className={[
                     "w-full rounded-md border px-3 py-2 text-slate-900 outline-none",
                     "border-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200",
-                    errors.phoneNumber && touched.phoneNumber
+                    errors.phoneNumber && (touched.phoneNumber || submitCount > 0)
                       ? "border-red-500 focus:border-red-500 focus:ring-red-200"
                       : "",
                   ].join(" ")}
                 />
               )}
             </Field>
-            {errors.phoneNumber && touched.phoneNumber ? (
+            <small className="mt-1 block text-xs text-slate-500">
+              9–13 digits, starting with +92 or 03
+            </small>
+            {errors.phoneNumber && (touched.phoneNumber || submitCount > 0) ? (
               <small className="mt-1 block text-sm text-red-600">
                 {errors.phoneNumber}
               </small>

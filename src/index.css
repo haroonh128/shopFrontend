@@ -4,53 +4,53 @@
 
 @layer base {
   :root {
-    --theme-headings: 33 37 41;
-    --theme-bodycolor: 73 80 87;
-    --theme-secondarytextcolor: 108 117 125;
-    --theme-bodybg: 248 249 250;
-    --theme-cardbg: 255 255 255;
-    --theme-border: 222 226 230;
-    --theme-inputborder: 206 212 218;
-    --theme-inputbg: 255 255 255;
-    --theme-sidebarbg: 17 25 40;
-    --theme-sidebarcaption: 148 163 184;
-    --theme-sidebarcolor: 226 232 240;
-    --theme-lightsidebarbg: 255 255 255;
-    --theme-lightsidebarcaption: 108 117 125;
-    --theme-lightsidebarcolor: 33 37 41;
-    --theme-headerbg: 255 255 255;
-    --theme-headercolor: 33 37 41;
-    --theme-activebg: 0 0 0;
+    --theme-headings: 22 48 44;
+    --theme-bodycolor: 68 88 82;
+    --theme-secondarytextcolor: 112 128 120;
+    --theme-bodybg: 246 242 234;
+    --theme-cardbg: 255 253 249;
+    --theme-border: 226 214 196;
+    --theme-inputborder: 208 194 174;
+    --theme-inputbg: 255 253 249;
+    --theme-sidebarbg: 16 40 36;
+    --theme-sidebarcaption: 176 198 188;
+    --theme-sidebarcolor: 236 244 240;
+    --theme-lightsidebarbg: 255 253 249;
+    --theme-lightsidebarcaption: 112 128 120;
+    --theme-lightsidebarcolor: 22 48 44;
+    --theme-headerbg: 255 252 247;
+    --theme-headercolor: 22 48 44;
+    --theme-activebg: 20 150 127;
 
-    --themedark-headings: 248 249 250;
-    --themedark-bodycolor: 206 212 218;
-    --themedark-secondarytextcolor: 173 181 189;
-    --themedark-bodybg: 18 20 24;
-    --themedark-cardbg: 26 29 34;
-    --themedark-border: 52 58 64;
-    --themedark-inputborder: 73 80 87;
-    --themedark-inputbg: 26 29 34;
-    --themedark-sidebarbg: 17 25 40;
-    --themedark-sidebarcaption: 148 163 184;
-    --themedark-sidebarcolor: 226 232 240;
-    --themedark-headerbg: 26 29 34;
-    --themedark-headercolor: 248 249 250;
-    --themedark-activebg: 255 255 255;
+    --themedark-headings: 246 242 234;
+    --themedark-bodycolor: 214 206 194;
+    --themedark-secondarytextcolor: 168 158 146;
+    --themedark-bodybg: 17 22 21;
+    --themedark-cardbg: 30 37 35;
+    --themedark-border: 58 70 66;
+    --themedark-inputborder: 78 92 86;
+    --themedark-inputbg: 30 37 35;
+    --themedark-sidebarbg: 12 20 18;
+    --themedark-sidebarcaption: 154 172 164;
+    --themedark-sidebarcolor: 226 236 230;
+    --themedark-headerbg: 24 31 29;
+    --themedark-headercolor: 246 242 234;
+    --themedark-activebg: 232 165 75;
   }
 
   /* Keep theme-* tokens in sync so surfaces without dark: variants still flip */
   html[data-pc-theme="dark"] {
-    --theme-headings: 248 249 250;
-    --theme-bodycolor: 206 212 218;
-    --theme-secondarytextcolor: 173 181 189;
-    --theme-bodybg: 18 20 24;
-    --theme-cardbg: 26 29 34;
-    --theme-border: 52 58 64;
-    --theme-inputborder: 73 80 87;
-    --theme-inputbg: 26 29 34;
-    --theme-headerbg: 26 29 34;
-    --theme-headercolor: 248 249 250;
-    --theme-activebg: 255 255 255;
+    --theme-headings: 246 242 234;
+    --theme-bodycolor: 214 206 194;
+    --theme-secondarytextcolor: 168 158 146;
+    --theme-bodybg: 17 22 21;
+    --theme-cardbg: 30 37 35;
+    --theme-border: 58 70 66;
+    --theme-inputborder: 78 92 86;
+    --theme-inputbg: 30 37 35;
+    --theme-headerbg: 24 31 29;
+    --theme-headercolor: 246 242 234;
+    --theme-activebg: 232 165 75;
     color-scheme: dark;
   }
 
@@ -61,7 +61,7 @@
 
 @layer components {
   .form-input {
-    @apply box-border w-[80%] rounded-md border border-slate-300 px-3 py-2 text-base text-slate-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200;
+    @apply box-border w-[80%] rounded-lg border border-theme-inputborder bg-theme-inputbg px-3 py-2 text-base text-theme-headings outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
   }
 
   /*
@@ -108,10 +108,10 @@
   }
 
   .form-input-label {
-    @apply block text-sm font-medium text-slate-700;
+    @apply block text-sm font-medium text-theme-headings;
   }
   .form-button-primary {
-    @apply bg-indigo-500 text-white rounded-md hover:bg-indigo-600;
+    @apply bg-primary-500 text-white rounded-lg hover:bg-primary-600;
   }
   .form-button-secondary {
     @apply bg-gray-500 text-white rounded-md hover:bg-gray-600;
@@ -159,13 +159,14 @@
   }
 
   .form-button-primary.form-button-primary {
-    background-color: rgb(99 102 241) !important;
-    border-color: rgb(99 102 241) !important;
+    background-color: #14967f !important;
+    border-color: #14967f !important;
     color: #fff !important;
+    box-shadow: 0 8px 18px -12px rgba(13, 122, 104, 0.9);
   }
   .form-button-primary:hover {
-    background-color: rgb(79 70 229) !important;
-    border-color: rgb(79 70 229) !important;
+    background-color: #0d7a68 !important;
+    border-color: #0d7a68 !important;
   }
   .form-button-secondary.form-button-secondary {
     background-color: rgb(107 114 128) !important;
@@ -188,7 +189,7 @@
 
   .icon-action {
     @apply inline-flex items-center justify-center p-0 m-0 border-0 bg-transparent
-      text-base leading-none text-slate-600 hover:text-indigo-600
+      text-base leading-none text-theme-bodycolor hover:text-primary-600
       cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed;
   }
   .icon-action-danger {
@@ -204,16 +205,155 @@
 
 body {
   margin: 0;
-  /* background-color: #b2c2d1; */
+  min-height: 100vh;
+  background-color: rgb(var(--theme-bodybg));
+  color: rgb(var(--theme-bodycolor));
+  background-image:
+    radial-gradient(1100px 460px at 100% -80px, rgba(20, 150, 127, 0.12), transparent 58%),
+    radial-gradient(820px 420px at -8% -40px, rgba(232, 165, 75, 0.16), transparent 52%);
 }
 
+html[data-pc-theme="dark"] body {
+  background-image:
+    radial-gradient(900px 380px at 100% -60px, rgba(20, 150, 127, 0.18), transparent 58%),
+    radial-gradient(720px 340px at 0% 0%, rgba(232, 165, 75, 0.1), transparent 52%);
+}
 
+html[data-pc-theme="light"] .bg-theme-bodybg {
+  background-color: rgb(var(--theme-bodybg));
+  background-image:
+    radial-gradient(1100px 460px at 100% -80px, rgba(20, 150, 127, 0.12), transparent 58%),
+    radial-gradient(820px 420px at -8% -40px, rgba(232, 165, 75, 0.16), transparent 52%);
+}
+
+html[data-pc-theme="dark"] .bg-theme-bodybg {
+  background-image:
+    radial-gradient(900px 380px at 100% -60px, rgba(20, 150, 127, 0.18), transparent 58%),
+    radial-gradient(720px 340px at 0% 0%, rgba(232, 165, 75, 0.1), transparent 52%);
+}
+
+.pc-content h1 {
+  letter-spacing: -0.02em;
+  color: rgb(var(--theme-headings));
+}
+
+html[data-pc-theme="light"] .pc-sidebar {
+  background: linear-gradient(168deg, #1c463f 0%, #12332e 46%, #0d2428 100%) !important;
+}
+
+html[data-pc-theme="dark"] .pc-sidebar {
+  background: linear-gradient(168deg, #1a2e2b 0%, #101816 100%) !important;
+}
+
+.pc-sidebar .m-header {
+  border-bottom: 1px solid rgba(255, 248, 236, 0.08);
+}
+
+.pc-navbar > .pc-item.active::before,
+.pc-navbar > .pc-item.pc-trigger::before {
+  background-color: #e8a54b !important;
+  box-shadow: 0 0 14px rgba(232, 165, 75, 0.7);
+}
+
+.pc-navbar > .pc-item.active > .pc-link,
+.pc-navbar > .pc-item.pc-trigger > .pc-link {
+  color: #fff8ee !important;
+}
+
+.pc-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #14967f 0%, #3dbfa6 42%, #e8a54b 100%);
+  pointer-events: none;
+}
+
+html[data-pc-theme="light"] .pc-header {
+  background: rgba(255, 252, 247, 0.9) !important;
+  box-shadow: 0 12px 28px -22px rgba(16, 40, 36, 0.55);
+}
+
+.card {
+  border-radius: 1rem !important;
+  border: 1px solid rgb(var(--theme-border)) !important;
+  background-color: rgb(var(--theme-cardbg)) !important;
+  box-shadow: 0 18px 40px -28px rgba(16, 40, 36, 0.45) !important;
+}
+
+html[data-pc-theme="dark"] .card {
+  box-shadow: none !important;
+}
+
+.card table thead tr {
+  background: linear-gradient(90deg, rgba(20, 150, 127, 0.12), rgba(232, 165, 75, 0.14)) !important;
+}
+
+.card table thead th {
+  color: rgb(var(--theme-headings));
+  font-weight: 600;
+}
+
+.card table tbody tr:hover {
+  background-color: rgba(232, 165, 75, 0.08) !important;
+}
 
 .login-image {
+  position: relative;
   background-image: url('../public/images/backGroundImage.jpg');
-  background-size:cover;
+  background-size: cover;
   background-position: center;
-background-repeat: no-repeat;
+  background-repeat: no-repeat;
+}
+
+.login-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 36, 32, 0.08) 15%, rgba(12, 28, 26, 0.72) 100%);
+}
+
+.bg-blue-700\/50 {
+  background-color: #f6f2ea !important;
+  background-image:
+    radial-gradient(720px 360px at 100% 0%, rgba(20, 150, 127, 0.16), transparent 60%),
+    radial-gradient(640px 320px at 0% 100%, rgba(232, 165, 75, 0.2), transparent 55%) !important;
+}
+
+.bg-blue-700\/50 > .bg-white {
+  border-radius: 1.25rem !important;
+  border-top: 4px solid #14967f;
+  background: #fffdf9 !important;
+  box-shadow: 0 28px 60px -32px rgba(16, 40, 36, 0.5);
+  padding: 1.75rem 1.5rem 2.25rem !important;
+}
+
+.bg-indigo-600,
+.hover\:bg-indigo-600:hover {
+  background-color: #14967f !important;
+}
+
+.hover\:bg-indigo-700:hover,
+.bg-indigo-700 {
+  background-color: #0d7a68 !important;
+}
+
+.focus\:border-indigo-500:focus {
+  border-color: #14967f !important;
+}
+
+.focus\:ring-indigo-200:focus {
+  --tw-ring-color: rgba(20, 150, 127, 0.28) !important;
+}
+
+.text-blue-500 {
+  color: #0d7a68 !important;
+}
+
+.hover\:text-blue-600:hover {
+  color: #0c6255 !important;
 }
 
 @media print {

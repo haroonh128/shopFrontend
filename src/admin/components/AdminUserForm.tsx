@@ -6,6 +6,7 @@ import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import { MODULES } from "../../authentication/config/modules";
 import type { AdminUserFormValues } from "../models/admin.models";
+import { requiredPhoneSchema } from "../../core/utils/phone";
 
 type Props = {
   initialValues?: Partial<AdminUserFormValues>;
@@ -42,7 +43,7 @@ export default function AdminUserForm({ initialValues, onSubmit, onCancel }: Pro
   const formInitialValues: AdminUserFormValues = { ...defaults, ...initialValues };
 
   const validationSchema = Yup.object({
-    phoneNumber: Yup.string().min(12, "Phone number must be 12-13 digits").required("Phone number is required"),
+    phoneNumber: requiredPhoneSchema(),
     pin: isEdit
       ? Yup.string().test("pin-length", "PIN must be 4 digits", (v) => !v || v.length === 4)
       : Yup.string().length(4, "PIN must be 4 digits").required("PIN is required"),
@@ -111,7 +112,7 @@ export default function AdminUserForm({ initialValues, onSubmit, onCancel }: Pro
                 {({ field }: any) => (
                   <div>
                     <label className="form-input-label">Phone Number</label>
-                    <InputText {...field} className="form-input w-full" placeholder="+92xxxxxxxxxx" />
+                    <InputText {...field} className="form-input w-full" placeholder="+92... or 03..." maxLength={14} />
                     <ErrorMessage name="phoneNumber" component="div" className="text-red-500 text-sm" />
                   </div>
                 )}

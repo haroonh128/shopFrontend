@@ -81,10 +81,16 @@ export default {
 
         // Minimal semantic palette referenced by plugins
         primary: {
-          50: '#e8f1ff',
-          500: '#1677ff',
-          600: '#0f62fe',
-          700: '#0043ce'
+          50: '#eefbf7',
+          100: '#d5f5ec',
+          200: '#aeead9',
+          300: '#78d8c2',
+          400: '#3dbfa6',
+          500: '#14967f',
+          600: '#0d7a68',
+          700: '#0c6255',
+          800: '#0e4e45',
+          900: '#0d403a'
         },
         secondary: {
           DEFAULT: '#6c757d',

@@ -5,6 +5,7 @@ import { InputSwitch } from "primereact/inputswitch";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import { userFormValues } from "../models/user.model";
+import { requiredPhoneSchema } from "../../core/utils/phone";
 
 const genderOptions = [
     { label: "Male", value: "0" },
@@ -20,7 +21,7 @@ type UsersFormProps = {
 
 const validationSchema = Yup.object({
     name: Yup.string().required("Name is required").min(3, "Name must be at least 3 characters long"),
-    phone: Yup.string().required("Phone is required").min(10, "Phone must be at least 10 characters long"),
+    phone: requiredPhoneSchema(),
     address: Yup.string().required("Address is required").min(20, "Address must be at least 20 characters long"),
     gender: Yup.string().required("Gender is required"),
     description: Yup.string().required("Description is required").min(100, "Description must be at least 100 characters long"),
@@ -103,10 +104,11 @@ export default function UsersForm({ initialValues, onSubmit, onCancel }: UsersFo
                                             <InputText
                                                 {...field}
                                                 id="phone"
-                                                autoComplete="off"
+                                                autoComplete="tel"
                                                 type="tel"
                                                 name="phone"
-                                                placeholder="Enter phone number"
+                                                placeholder="+92... or 03..."
+                                                maxLength={14}
                                                 className="form-input"
                                             />
                                             <ErrorMessage name="phone" component="div" className="text-red-500" />

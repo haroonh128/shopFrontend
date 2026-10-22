@@ -12,33 +12,44 @@ export const calculateBmi = (heightCm?: number | null, weightKg?: number | null)
   return Math.round((w / (meters * meters)) * 100) / 100;
 };
 
+/** Values match API JsonStringEnumConverter (camelCase). */
 export const genderOptions = [
-  { label: "Male", value: "Male" },
-  { label: "Female", value: "Female" },
-  { label: "Other", value: "Other" },
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
+  { label: "Other", value: "other" },
 ];
 
 export const maritalStatusOptions = [
-  { label: "Single", value: "Single" },
-  { label: "Married", value: "Married" },
-  { label: "Divorced", value: "Divorced" },
-  { label: "Widowed", value: "Widowed" },
-  { label: "Other", value: "Other" },
+  { label: "Single", value: "single" },
+  { label: "Married", value: "married" },
+  { label: "Divorced", value: "divorced" },
+  { label: "Widowed", value: "widowed" },
+  { label: "Other", value: "other" },
 ];
 
 export const bloodGroupOptions = [
-  { label: "Unknown", value: "Unknown" },
-  { label: "A+", value: "APositive" },
-  { label: "A-", value: "ANegative" },
-  { label: "B+", value: "BPositive" },
-  { label: "B-", value: "BNegative" },
-  { label: "AB+", value: "ABPositive" },
-  { label: "AB-", value: "ABNegative" },
-  { label: "O+", value: "OPositive" },
-  { label: "O-", value: "ONegative" },
+  { label: "Unknown", value: "unknown" },
+  { label: "A+", value: "aPositive" },
+  { label: "A-", value: "aNegative" },
+  { label: "B+", value: "bPositive" },
+  { label: "B-", value: "bNegative" },
+  { label: "AB+", value: "abPositive" },
+  { label: "AB-", value: "abNegative" },
+  { label: "O+", value: "oPositive" },
+  { label: "O-", value: "oNegative" },
 ];
 
-export const bloodGroupLabel = (value?: string | null) => {
-  const match = bloodGroupOptions.find((o) => o.value === value);
-  return match?.label ?? value ?? "—";
+const optionLabel = (
+  options: { label: string; value: string }[],
+  value?: string | null,
+  fallback = "—"
+) => {
+  if (value == null || value === "") return fallback;
+  const normalized = String(value).toLowerCase();
+  const match = options.find((o) => o.value.toLowerCase() === normalized);
+  return match?.label ?? value;
 };
+
+export const genderLabel = (value?: string | null) => optionLabel(genderOptions, value);
+
+export const bloodGroupLabel = (value?: string | null) => optionLabel(bloodGroupOptions, value);

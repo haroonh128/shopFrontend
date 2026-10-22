@@ -1,5 +1,5 @@
 import type { ConsultationDetails, Patient } from "../models/clinic.models";
-import { bloodGroupLabel, formatCurrency } from "../utils/clinic.utils";
+import { bloodGroupLabel, formatCurrency, genderLabel } from "../utils/clinic.utils";
 import MedicalDocumentHeader from "./MedicalDocumentHeader";
 
 type Props = {
@@ -17,7 +17,7 @@ export default function ConsultationPrintView({ consultation, patient }: Props) 
       <div className="border-t border-b border-black py-3 my-4 text-sm grid grid-cols-2 gap-2">
         <div><strong>Patient:</strong> {consultation.patientName || patient?.fullName}</div>
         <div><strong>MR Number:</strong> {consultation.patientMRNumber || patient?.mrNumber}</div>
-        <div><strong>Age / Gender:</strong> {patient?.age ?? "—"} / {patient?.gender || "—"}</div>
+        <div><strong>Age / Gender:</strong> {patient?.age ?? "—"} / {genderLabel(patient?.gender)}</div>
         <div><strong>Contact:</strong> {patient?.contactNumber || "—"}</div>
         <div><strong>Blood Group:</strong> {bloodGroupLabel(patient?.bloodGroup)}</div>
         <div><strong>Visit Date:</strong> {new Date(consultation.visitDate).toLocaleString()}</div>

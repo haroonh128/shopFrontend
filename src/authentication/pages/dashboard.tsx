@@ -61,7 +61,7 @@ function CourseCard({ course }: { course: Course }) {
           <div className="absolute inset-x-0 bottom-0 flex justify-center pb-4 pt-8 bg-gradient-to-t from-black/50 to-transparent">
             <button
               type="button"
-              className="flex items-center gap-2 rounded-md bg-[#0f172a] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(79,70,229,0.45)] transition hover:bg-[#1e293b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
+              className="flex items-center gap-2 rounded-md bg-[#12332e] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(20,150,127,0.4)] transition hover:bg-[#1c463f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#14967f]"
             >
               <i className="pi pi-shopping-cart text-[0.9rem]" aria-hidden />
               Buy Now
@@ -119,7 +119,7 @@ function CourseCard({ course }: { course: Course }) {
         <div className="mt-auto pt-5">
           <button
             type="button"
-            className="rounded border border-[#00AEEF] bg-transparent px-4 py-2 text-sm font-medium text-[#00AEEF] transition hover:bg-[#00AEEF]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
+            className="rounded border border-[#14967f] bg-transparent px-4 py-2 text-sm font-medium text-[#14967f] transition hover:bg-[#14967f]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#14967f]"
           >
             Read More
           </button>
@@ -138,7 +138,7 @@ export default function Dashboard() {
         </h1>
         <button
           type="button"
-          className="inline-flex w-full items-center justify-center rounded-md bg-[#00AEEF] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-105 active:brightness-95 sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
+          className="inline-flex w-full items-center justify-center rounded-md bg-[#14967f] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-105 active:brightness-95 sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#14967f]"
         >
           Add Student
         </button>

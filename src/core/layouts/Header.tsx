@@ -50,12 +50,17 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
           </button>
         </li>
         <li className="dropdown pc-h-item">
-          <a className="pc-head-link dropdown-toggle me-0 trig-drp-search" data-pc-toggle="dropdown" href="#" role="button"
-            aria-haspopup="false" aria-expanded="false">
+          <button
+            type="button"
+            className="pc-head-link dropdown-toggle me-0 trig-drp-search"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Search"
+          >
             <i className="ti ti-search"></i>
-          </a>
+          </button>
           <div className="dropdown-menu pc-h-dropdown drp-search">
-            <form className="px-2 py-1">
+            <form className="px-2 py-1" onSubmit={(e) => e.preventDefault()}>
               <input type="search" className="form-control !border-0 !shadow-none" placeholder="Search here. . ." />
             </form>
           </div>
@@ -65,10 +70,15 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
     <div className="ms-auto">
       <ul className="inline-flex *:min-h-header-height *:inline-flex *:items-center">
         <li className="dropdown pc-h-item">
-          <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
-            aria-haspopup="true" aria-expanded="false" aria-label="Theme">
+          <button
+            type="button"
+            className="pc-head-link dropdown-toggle me-0"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Theme"
+          >
             <i className={resolved === "dark" ? "ti ti-moon" : "ti ti-sun"}></i>
-          </a>
+          </button>
           <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
             <button
               type="button"
@@ -97,10 +107,15 @@ export default function Header({ onToggleDesktop, onToggleMobile }: HeaderProps)
           </div>
         </li>
         <li className="dropdown pc-h-item">
-          <a className="pc-head-link dropdown-toggle me-0" data-pc-toggle="dropdown" href="#" role="button"
-            aria-haspopup="false" aria-expanded="false">
+          <button
+            type="button"
+            className="pc-head-link dropdown-toggle me-0"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Settings"
+          >
             <i className="ti ti-settings"></i>
-          </a>
+          </button>
           <div className="dropdown-menu dropdown-menu-end pc-h-dropdown">
             {/* <a href="#!" className="dropdown-item">
               <i className="ti ti-user"></i>

@@ -62,6 +62,12 @@ export const MODULES: ModuleEntry[] = [
 
 export const ADMIN_MODULE_ID = "admin-panel";
 
+export type AuthUserLike = {
+  moduleId?: string | null;
+  role?: string;
+  isAdmin?: string | boolean;
+} | null | undefined;
+
 export const isAdminFromAuth = (user?: {
   role?: string;
   isAdmin?: string | boolean;
@@ -71,9 +77,44 @@ export const isAdminFromAuth = (user?: {
   return user.isAdmin === true || user.isAdmin === "true";
 };
 
+/** Modules the user is allowed to open (product scope + admin when applicable). */
+export const getVisibleModules = (user: AuthUserLike): ModuleEntry[] => {
+  const isAdmin = isAdminFromAuth(user);
+  const productModules = MODULES.filter((m) => m.id !== ADMIN_MODULE_ID);
+  const scoped = user?.moduleId
+    ? productModules.filter((m) => m.id === user.moduleId)
+    : productModules;
+
+  if (isAdmin) {
+    const adminModule = MODULES.find((m) => m.id === ADMIN_MODULE_ID);
+    return adminModule ? [...scoped, adminModule] : scoped;
+  }
+
+  return scoped;
+};
+
 /** Pills that have a real route (shown in sidebar). */
 export const getModuleNavItems = (module: ModuleEntry | undefined): Pill[] =>
   (module?.pills ?? []).filter((pill): pill is Pill & { to: string } => Boolean(pill.to));
+
+/** First navigable route for a module (its dashboard / home). */
+export const getModuleHomePath = (module: ModuleEntry | undefined): string | null =>
+  getModuleNavItems(module)[0]?.to ?? null;
+
+/**
+ * Where to send the user after login/OTP.
+ * Admins keep the admin home; users with a single module skip the picker.
+ */
+export const getPostAuthPath = (user: AuthUserLike): string => {
+  if (isAdminFromAuth(user)) return "/admin/users";
+
+  const visible = getVisibleModules(user);
+  if (visible.length === 1) {
+    return getModuleHomePath(visible[0]) ?? "/modules";
+  }
+
+  return "/modules";
+};
 
 export const findModuleById = (moduleId: string | null | undefined) =>
   MODULES.find((m) => m.id === moduleId);

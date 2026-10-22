@@ -21,7 +21,7 @@ import {
   searchTests,
   updateConsultation,
 } from "../services/clinic.service";
-import { calculateBmi, formatCurrency } from "../utils/clinic.utils";
+import { calculateBmi, formatCurrency, genderLabel } from "../utils/clinic.utils";
 import ConsultationPrintView from "../components/ConsultationPrintView";
 import PrescriptionPrintView from "../components/PrescriptionPrintView";
 
@@ -212,7 +212,7 @@ export default function ConsultationFormPage() {
                   <h1 className="text-2xl font-bold">{values.id ? "Consultation" : "New Consultation"}</h1>
                   {patient && (
                     <div className="text-sm text-slate-600 mt-1">
-                      {patient.fullName} · {patient.mrNumber} · {patient.gender}
+                      {patient.fullName} · {patient.mrNumber} · {genderLabel(patient.gender)}
                       {patient.allergies ? ` · Allergies: ${patient.allergies}` : ""}
                     </div>
                   )}
