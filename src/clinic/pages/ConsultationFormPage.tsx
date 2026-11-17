@@ -29,6 +29,16 @@ const validationSchema = Yup.object({
   doctorId: Yup.string().required("Doctor is required"),
   consultationFee: Yup.number().min(0, "Fee cannot be negative").required("Consultation fee is required"),
   chiefComplaint: Yup.string().nullable(),
+  followUpDate: Yup.string().when("followUpRequired", {
+    is: true,
+    then: (schema) => schema.required("Follow-up date is required"),
+    otherwise: (schema) => schema.nullable(),
+  }),
+  followUpNotes: Yup.string().when("followUpRequired", {
+    is: true,
+    then: (schema) => schema.trim().required("Follow-up reason is required"),
+    otherwise: (schema) => schema.nullable(),
+  }),
 });
 
 const emptyConsultation = (patientId: string): ConsultationDetails => ({
@@ -182,6 +192,7 @@ export default function ConsultationFormPage() {
               ...values,
               visitDate: new Date(values.visitDate).toISOString(),
               followUpDate: values.followUpRequired && values.followUpDate ? new Date(values.followUpDate).toISOString() : null,
+              followUpNotes: values.followUpRequired ? values.followUpNotes?.trim() || null : null,
               diagnoses: (values.diagnoses || []).filter((d) => d.diagnosisName?.trim()),
               tests: (values.tests || []).filter((t) => t.testName?.trim()),
               prescription: {
@@ -525,31 +536,41 @@ export default function ConsultationFormPage() {
               <section className="mb-5">
                 <h2 className="text-lg font-semibold mb-2">Follow-up</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 md:col-span-3">
                     <InputSwitch
                       checked={values.followUpRequired}
-                      onChange={(e) => setFieldValue("followUpRequired", e.value)}
+                      onChange={(e) => {
+                        setFieldValue("followUpRequired", e.value);
+                        if (!e.value) {
+                          setFieldValue("followUpDate", "");
+                          setFieldValue("followUpNotes", "");
+                        }
+                      }}
                     />
                     <span>Follow-up required</span>
                   </div>
                   {values.followUpRequired && (
-                    <Field name="followUpDate">
-                      {({ field }: any) => (
-                        <div>
-                          <label className="form-input-label">Follow-up Date</label>
-                          <InputText {...field} type="date" className="form-input w-full" />
-                        </div>
-                      )}
-                    </Field>
+                    <>
+                      <Field name="followUpDate">
+                        {({ field }: any) => (
+                          <div>
+                            <label className="form-input-label">Follow-up date <span className="text-red-500">*</span></label>
+                            <InputText {...field} type="date" className="form-input w-full" />
+                            <ErrorMessage name="followUpDate" component="div" className="text-red-500 text-sm" />
+                          </div>
+                        )}
+                      </Field>
+                      <Field name="followUpNotes">
+                        {({ field }: any) => (
+                          <div className="md:col-span-3">
+                            <label className="form-input-label">Follow-up reason <span className="text-red-500">*</span></label>
+                            <InputTextarea {...field} rows={2} className="form-input w-full" />
+                            <ErrorMessage name="followUpNotes" component="div" className="text-red-500 text-sm" />
+                          </div>
+                        )}
+                      </Field>
+                    </>
                   )}
-                  <Field name="followUpNotes">
-                    {({ field }: any) => (
-                      <div className="md:col-span-3">
-                        <label className="form-input-label">Follow-up Instructions</label>
-                        <InputTextarea {...field} rows={2} className="form-input w-full" />
-                      </div>
-                    )}
-                  </Field>
                 </div>
               </section>
 
