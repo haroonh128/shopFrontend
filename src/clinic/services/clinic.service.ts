@@ -2,6 +2,7 @@ import { http } from "../../core/http";
 import type {
   ConsultationDetails,
   ConsultationListItem,
+  FollowUpList,
   Doctor,
   MasterItem,
   PagedResult,
@@ -40,6 +41,8 @@ export const deletePatient = (id: string) => http.delete<boolean>(`/Patient/${id
 
 export const getPatientConsultations = (patientId: string) =>
   http.get<ConsultationListItem[]>(`/Patient/${patientId}/consultations`);
+
+export const getFollowUps = () => http.get<FollowUpList>("/Consultation/follow-ups");
 
 export const getConsultationById = (id: string) =>
   http.get<ConsultationDetails>(`/Consultation/${id}`);

@@ -122,6 +122,31 @@ export interface Prescription {
   items: PrescriptionItem[];
 }
 
+export interface FollowUpListItem {
+  consultationId: string;
+  patientId: string;
+  patientName: string;
+  patientMRNumber: string;
+  contactNumber: string;
+  allergies?: string | null;
+  visitDate: string;
+  visitNumber: string;
+  chiefComplaint?: string | null;
+  advice?: string | null;
+  followUpDate?: string | null;
+  followUpNotes?: string | null;
+  doctorName: string;
+  tests: string[];
+  overdue: boolean;
+}
+
+export interface FollowUpList {
+  doctorLinked: boolean;
+  doctorName?: string | null;
+  notice?: string | null;
+  items: FollowUpListItem[];
+}
+
 export interface ConsultationListItem {
   id: string;
   patientId: string;

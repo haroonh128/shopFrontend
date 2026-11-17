@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Button } from "primereact/button";
 import PatientForm from "../components/PatientForm";
 import type { ConsultationListItem, Patient } from "../models/clinic.models";
@@ -15,6 +15,8 @@ type Tab = "overview" | "consultations";
 export default function PatientProfilePage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const backTo = searchParams.get("from") === "follow-ups" ? "/clinic/follow-ups" : "/clinic/patients";
   const [patient, setPatient] = useState<Patient | null>(null);
   const [consultations, setConsultations] = useState<ConsultationListItem[]>([]);
   const [tab, setTab] = useState<Tab>("overview");
@@ -52,7 +54,7 @@ export default function PatientProfilePage() {
           type="button"
           className="pi pi-arrow-left icon-action"
           title="Back"
-          onClick={() => navigate("/clinic/patients")}
+          onClick={() => navigate(backTo)}
         />
       </div>
     );
@@ -103,7 +105,7 @@ export default function PatientProfilePage() {
               type="button"
               className="pi pi-arrow-left icon-action"
               title="Back"
-              onClick={() => navigate("/clinic/patients")}
+              onClick={() => navigate(backTo)}
             />
           </div>
         </div>
