@@ -8,6 +8,7 @@ import TailorDashboard from "../tailor/pages/tailor-dashboard";
 import Measurements from "../tailor/pages/measurements";
 import Costs from "../tailor/pages/costs";
 import PatientsPage from "../clinic/pages/PatientsPage";
+import FollowUpsPage from "../clinic/pages/FollowUpsPage";
 import PatientProfilePage from "../clinic/pages/PatientProfilePage";
 import ConsultationFormPage from "../clinic/pages/ConsultationFormPage";
 import DoctorsPage from "../clinic/pages/DoctorsPage";
@@ -71,6 +72,16 @@ export default function ProtectedRoutes() {
           <RequireAuth>
             <MainLayout>
               <PatientsPage />
+            </MainLayout>
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/clinic/follow-ups"
+        element={
+          <RequireAuth>
+            <MainLayout>
+              <FollowUpsPage />
             </MainLayout>
           </RequireAuth>
         }

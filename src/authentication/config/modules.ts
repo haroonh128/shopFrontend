@@ -21,6 +21,7 @@ export const MODULES: ModuleEntry[] = [
     icon: "pi pi-heart",
     pills: [
       { id: "patients", label: "Patients", to: "/clinic/patients", icon: "pi pi-users" },
+      { id: "follow-ups", label: "Follow-ups", to: "/clinic/follow-ups", icon: "pi pi-calendar" },
       { id: "doctors", label: "Doctors", to: "/clinic/doctors", icon: "pi pi-user" },
       { id: "practice", label: "Practice", to: "/clinic/practice", icon: "pi pi-building" },
     ],
