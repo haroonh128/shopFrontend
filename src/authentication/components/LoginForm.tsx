@@ -1,4 +1,5 @@
-import { Formik, Form, Field } from "formik";
+import { useState } from "react";
+import { Formik, Form, Field, type FieldProps } from "formik";
 import * as Yup from "yup";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -19,6 +20,8 @@ const schema = Yup.object({
 });
 
 export default function LoginForm({ onSubmit }: Props) {
+  const [pinVisible, setPinVisible] = useState(false);
+
   return (
     <Formik<LoginFormValues>
       initialValues={{ phoneNumber: "", pin: "" }}
@@ -57,23 +60,41 @@ export default function LoginForm({ onSubmit }: Props) {
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label
+              htmlFor="pin"
+              className="mb-1 block text-sm font-medium text-slate-700"
+            >
               Pin
             </label>
             <Field name="pin">
-              {({ field }: any) => (
-                <InputText
-                  {...field}
-                  type="password"
-                  autoComplete="current-password"
-                  className={[
-                    "w-full rounded-md border px-3 py-2 text-slate-900 outline-none",
-                    "border-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200",
-                    errors.pin && touched.pin
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-200"
-                      : "",
-                  ].join(" ")}
-                />
+              {({ field }: FieldProps<string>) => (
+                <div className="relative">
+                  <InputText
+                    {...field}
+                    id="pin"
+                    type={pinVisible ? "text" : "password"}
+                    autoComplete="current-password"
+                    className={[
+                      "w-full rounded-md border px-3 py-2 pr-10 text-slate-900 outline-none",
+                      "border-slate-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200",
+                      errors.pin && touched.pin
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+                        : "",
+                    ].join(" ")}
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 hover:text-slate-700"
+                    onClick={() => setPinVisible((visible) => !visible)}
+                    aria-label={pinVisible ? "Hide pin" : "Show pin"}
+                    aria-pressed={pinVisible}
+                  >
+                    <i
+                      className={pinVisible ? "pi pi-eye-slash" : "pi pi-eye"}
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
               )}
             </Field>
             {errors.pin && touched.pin ? (

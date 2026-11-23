@@ -24,6 +24,7 @@ import {
 import { calculateBmi, formatCurrency, genderLabel } from "../utils/clinic.utils";
 import ConsultationPrintView from "../components/ConsultationPrintView";
 import PrescriptionPrintView from "../components/PrescriptionPrintView";
+import RecordTextUpload from "../components/RecordTextUpload";
 
 const validationSchema = Yup.object({
   doctorId: Yup.string().required("Doctor is required"),
@@ -247,6 +248,8 @@ export default function ConsultationFormPage() {
                   />
                 </div>
               </div>
+
+              {isNew && <RecordTextUpload />}
 
               <section className="mb-5">
                 <h2 className="text-lg font-semibold mb-2">Doctor & Fee</h2>
