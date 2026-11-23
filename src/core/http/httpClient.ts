@@ -140,7 +140,9 @@ async function request<TResponse, TBody = unknown>(
   try {
     const res = await fetch(`${BASE_URL}${url}`, {
       method,
-      credentials: "include", // REQUIRED for ASP.NET cookies
+      // Auth is a Bearer token, not a cookie. "include" makes the browser
+      // require Access-Control-Allow-Credentials, which production was not sending.
+      credentials: "omit",
       headers: {
         "Content-Type": "application/json",
         ...getAuthHeaders(),
